@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row">
+    <form
+      (ngSubmit)="onSubmit()"
+      [formGroup]="numberOfItemForm"
+      class="form-container"
+    >
+      <div class="form-container mt-4">
+        <mat-form-field>
+          <input
+            type="number"
+            formControlName="numberOfCommonItems"
+            matInput
+            placeholder="Ortak eşya sayısı"
+          />
+          <mat-error *ngIf="getControls.numberOfCommonItems.invalid">
+            {{
+              validationService.getValidationMessage(
+                getControls.numberOfCommonItems,
+                "Ortak eşya sayısı"
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-container mt-4">
+        <mat-form-field>
+          <input
+            formControlName="user1Name"
+            matInput
+            placeholder="İlk kullanıcının ismi"
+          />
+          <mat-error *ngIf="getControls.user1Name.invalid">
+            {{
+              validationService.getValidationMessage(
+                getControls.user1Name,
+                "İlk kullanıcının ismi"
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-container mt-4">
+        <mat-form-field>
+          <input
+            type="number"
+            formControlName="user1NumberOfItems"
+            matInput
+            placeholder="İlk kullanıcının aldığı eşya sayısı"
+          />
+          <mat-error *ngIf="getControls.user1NumberOfItems.invalid">
+            {{
+              validationService.getValidationMessage(
+                getControls.user1NumberOfItems,
+                "İlk kullanıcının aldığı eşya sayısı"
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-container mt-4">
+        <mat-form-field>
+          <input
+            formControlName="user2Name"
+            matInput
+            placeholder="İkinci kullanıcının ismi"
+          />
+          <mat-error *ngIf="getControls.user2Name.invalid">
+            {{
+              validationService.getValidationMessage(
+                getControls.user2Name,
+                "İkinci kullanıcının ismi"
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-container mt-4">
+        <mat-form-field>
+          <input
+            type="number"
+            formControlName="user2NumberOfItems"
+            matInput
+            placeholder="İkinci kullanıcının aldığı eşya sayısı"
+          />
+          <mat-error *ngIf="getControls.user2NumberOfItems.invalid">
+            {{
+              validationService.getValidationMessage(
+                getControls.user2NumberOfItems,
+                "İkinci kullanıcının aldığı eşya sayısı"
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <br />
+      <button
+        class="mt-2"
+        [disabled]="loading"
+        mat-raised-button
+        color="primary"
+      >
+        Gönder
+        <span
+          *ngIf="loading"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+      </button>
+    </form>
+  </div>
+</div>

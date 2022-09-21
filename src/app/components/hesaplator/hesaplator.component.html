@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="row">
+    <h1
+      *ngIf="
+        (user1andcommondebt == 0 && user2andcommondebt == 0) ||
+          this.getControls1.sepet1.invalid ||
+          this.getControls2.sepet2.invalid ||
+          this.getControlsortak.sepetortak.invalid;
+        else calculated
+      "
+      class="mt-5"
+    >
+      Borç Hesaplayıcı
+    </h1>
+    <hr />
+    <div class="" [formGroup]="form1">
+      <h2 class="blue">{{ user1Name | titlecase }} - Sepeti</h2>
+      <hr />
+      <ng-container formArrayName="sepet1">
+        <ng-container *ngFor="let form1 of sepet1.controls; let i = index">
+          <div
+            style="font-weight: bolder"
+            class="form-container mt-3"
+            [formGroupName]="i"
+          >
+            {{ user1Name | titlecase }} - {{ i + 1 }}. Eşya
+
+            <mat-form-field>
+              <input formControlName="isim" matInput placeholder="Eşya ismi" />
+              <mat-error *ngIf="getControls1.sepet1.invalid">
+                {{
+                  validationService.getValidationMessage(
+                    getControls1.sepet1,
+                    "İsmi"
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                type="number"
+                formControlName="fiyat"
+                matInput
+                placeholder="Fiyatı"
+              />
+              <mat-error *ngIf="getControls1.sepet1.invalid">
+                {{
+                  validationService.getValidationMessage(
+                    getControls1.sepet1,
+                    "Fiyatı"
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="" [formGroup]="form2">
+      <h2 class="magenta">{{ user2Name | titlecase }} - Sepeti</h2>
+      <hr />
+      <ng-container formArrayName="sepet2">
+        <ng-container *ngFor="let form2 of sepet2.controls; let i = index">
+          <div
+            style="font-weight: bolder"
+            class="form-container mt-3"
+            [formGroupName]="i"
+          >
+            {{ user2Name | titlecase }} - {{ i + 1 }}. Eşya
+
+            <mat-form-field>
+              <input formControlName="isim" matInput placeholder="Eşya ismi" />
+              <mat-error *ngIf="getControls2.sepet2.invalid">
+                {{
+                  validationService.getValidationMessage(
+                    getControls2.sepet2,
+                    "İsmi"
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                type="number"
+                formControlName="fiyat"
+                matInput
+                placeholder="Fiyatı"
+              />
+              <mat-error *ngIf="getControls2.sepet2.invalid">
+                {{
+                  validationService.getValidationMessage(
+                    getControls2.sepet2,
+                    "Fiyatı"
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="" [formGroup]="formortak">
+      <h2 class="purple">Ortak Sepet</h2>
+      <hr />
+      <ng-container formArrayName="sepetortak">
+        <ng-container *ngFor="let formortak of sepetortak.controls; let i = index">
+          <div
+            style="font-weight: bolder"
+            class="form-container mt-3"
+            [formGroupName]="i"
+          >
+            Ortak - {{ i + 1 }}. Eşya
+
+            <mat-form-field>
+              <input formControlName="isim" matInput placeholder="Eşya ismi" />
+              <mat-error *ngIf="getControlsortak.sepetortak.invalid">
+                {{
+                  validationService.getValidationMessage(
+                    getControlsortak.sepetortak,
+                    "İsmi"
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                type="number"
+                formControlName="fiyat"
+                matInput
+                placeholder="Fiyatı"
+              />
+              <mat-error *ngIf="getControlsortak.sepetortak.invalid">
+                {{
+                  validationService.getValidationMessage(
+                    getControlsortak.sepetortak,
+                    "Fiyatı"
+                  )
+                }}
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-container>
+      </ng-container>
+      <button
+        class="mb-5 mt-3"
+        (click)="addDebt()"
+        mat-raised-button
+        color="primary"
+      >
+        Hesapla
+      </button>
+    </div>
+  </div>
+</div>
+<ng-template #calculated>
+  <h2 class="mt-5 blue">
+   {{user1Name}} - Borcu: {{ user1andcommondebt | number: ".2-2" }}
+  </h2>
+  <h2 class="mt-5 magenta">
+    {{user2Name}} - Borcu: {{ user2andcommondebt | number: ".2-2" }}
+  </h2>
+</ng-template>
